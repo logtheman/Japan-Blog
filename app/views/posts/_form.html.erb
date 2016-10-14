@@ -1,0 +1,32 @@
+<table class="table table-hover">
+  <tr>
+  	<th>Date</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th colspan="2"></th>
+  </tr>
+	<%= @posts.each do |f| %>
+		<tr>
+			<td><%= f.created_at %></td>
+			<td><%= f.title %></td>
+			<td><%= f.description %></td>
+			<td><%= f.tag_list %></td>
+			<td>
+			<div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    Actions
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><%= link_to 'Edit', edit_post_path(f) %></li>
+				    <li><%= link_to 'Comment', post_path(f) %></li>
+				    <li><%= link_to 'Destroy', post_path(f),
+				method: :delete,
+				data: { confirm: 'Are you sure you want to delete?'} %></li>
+				  </ul>
+				</div>
+
+			</td>
+		</tr>
+	<% end %>
+</table>
