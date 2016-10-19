@@ -1,9 +1,19 @@
 class PostsController < ApplicationController
-	
+  before_action :get_post, only: [:edit, :update, :destroy]
+# before_action :check_auth, only: [:edit, :update, :destroy]
+  #todo -
+  def check_auth
+
+  end
+
+  def get_post
+    @post = Post.find(params[:id])
+  end
+
   def index
     @posts = Post.all
     if params[:sort_by] == 'date_newest'
-      @posts = @posts.order(created_at: :desc)
+      @posts = @posts.sort_by_newest
     end
     if params[:sort_by] == 'date_oldest'
       @posts = @posts.order(created_at: :asc)
@@ -15,7 +25,7 @@ class PostsController < ApplicationController
 
 	def show
     	@post = Post.find(params[:id])
-    end
+  end
 
 	def new
 		@post = Post.new
@@ -28,9 +38,9 @@ class PostsController < ApplicationController
 	def create
 	  @post = Post.new(post_params)
     	if @post.save
-      	redirect_to @post
-    	else
-  #   	 render 'index'
+      	redirect_to posts_path
+#    	else
+#        render 'index'
     	end
     end	
 
@@ -38,7 +48,7 @@ class PostsController < ApplicationController
     	@post = Post.find(params[:id])
 
     	if @post.update(post_params)
-    		redirect_to @post
+    		redirect_to posts_path
     	else
     		render 'edit'
     	end

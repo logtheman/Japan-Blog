@@ -4,4 +4,5 @@ class Post < ActiveRecord::Base
                     length: { minimum: 5 }
     acts_as_taggable
 
+    scope :sort_by_newest, -> { order(created_at: :desc) }
 end
