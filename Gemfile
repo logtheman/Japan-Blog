@@ -28,6 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # tags gem for adding tags to the post
 gem 'acts-as-taggable-on', '~> 4.0'
 
+#Add User Auth
+gem 'devise'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

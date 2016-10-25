@@ -1,0 +1,33 @@
+<div class="modal fade" id="sign_up" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2>Sign Up</h2>
+      </div>
+
+      <div class="modal-body">
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div><%= f.label :email %><br />
+        <%= f.email_field :email, :autofocus => true %></div>
+         
+         <p><%= f.label :username %><br />
+        <%= f.text_field :username %></p>
+
+        <div><%= f.label :password %><br />
+        <%= f.password_field :password %></div>
+
+        <div><%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation %></div>
+        <br />
+        <div><%= f.submit "Sign up", :class => 'btn btn-small btn-success' %></div>
+      </div>
+      <div class="modal-footer">
+      <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+   </div>
+  </div>  
+</div>

@@ -16,28 +16,31 @@
         <div class="panel-body">
           <li>Tags: <%= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
         </div>
+
   			<div class="panel-body">
         <%= render 'modal', post: f %>
+        <%= render "comments", post: f %>
 						<ul class="nav navbar-nav navbar-right">
             <li>
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#edit-post-<%= f.id %>">
-                  Edit Post
-                </button>
+
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="comments" data-target="#post-<%= f.id %>">
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+              </button>   
             </li>
                 <li>
-                  <%= link_to post_path(f), class: "btn btn-default btn-lg" do %>
-                      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to edit_post_path(f), class: "btn btn-default btn-lg" do %>
+                  <% if logged_in? && current_user == f.user %>           
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#edit-post-<%= f.id %>">
                       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </button>    
+                    </li>
+    						    <li> 
+                      <%= button_to f, method: :delete, remote: true, class: "btn btn-primary btn-lg" do %>
+                        <span class="glyphicon glyphicon-trash"></span>
+                      <% end %>
                   <% end %>
-                </li>
-						    <li><%= link_to 'Delete', post_path(f),
-						method: :delete,
-						data: { confirm: 'Are you sure you want to delete?'} %></li>
 						 </ul>
+            <small>Created By <%= f.user %></small>
+
 					</div>
 		  		</li>
 		  	</div>

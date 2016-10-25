@@ -12,6 +12,11 @@
 	<%= @post.description %>
 </p>
 
+<p>
+  <strong>Post by</strong>
+  <%= @post.user %>
+</p>
+
 <h2>Comments</h2>
 <% @post.comments.each do |comment| %>
   <p>

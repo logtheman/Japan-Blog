@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_post, only: [:edit, :update, :destroy]
-# before_action :check_auth, only: [:edit, :update, :destroy]
-  #todo -
+  before_action :same_user , only: [:edit,:update,:destroy]
+
   def check_auth
 
   end
@@ -21,6 +22,7 @@ class PostsController < ApplicationController
     if params[:tag]
       @posts = Post.tagged_with(params[:tag])
     end
+    
   end
 
 	def show
@@ -37,10 +39,9 @@ class PostsController < ApplicationController
 
 	def create
 	  @post = Post.new(post_params)
+    @post.user_id = current_user.id
     	if @post.save
       	redirect_to posts_path
-#    	else
-#        render 'index'
     	end
     end	
 
@@ -66,4 +67,15 @@ class PostsController < ApplicationController
   		def post_params
     		params.require(:post).permit(:title, :description, :tag_list)
   		end
+
+
+
+  def same_user
+    @post = Post.find(params[:id])
+    if current_user != @post.user
+        flash[:danger] = "Your are not allowed"
+        redirect_to root_path
+    end
   end
+
+end
