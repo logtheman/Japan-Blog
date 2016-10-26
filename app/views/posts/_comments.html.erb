@@ -1,4 +1,4 @@
-<% id = "post-#{post.id}" %>
+<% id = "post-comments-#{post.id}" %>
 <div class="modal fade" id="<%= id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
 
@@ -6,29 +6,36 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2>Comments</h2>
       </div>
       <div class="modal-body">
-      <h2>Comments</h2>
-
-        <%= form_for post do |f| %>
-    			<p>
-    				<%= f.label :title %><br>
-    				<%= f.text_field :title %>
-    			 </p>
-    			<p>
-    				<%= f.label :description %><br>
-    				<%= f.text_field :description, size: '60x30' %>
-    			</p>
-          <p>
-            <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-
-            <%= f.text_field :tag_list, size: '40x8' %>
-          </p>
+        <% post.comments.each do |f| %>
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+        			  <p>
+                  <small>Posted by:</small>
+                  <%= f.user.username %>
+                </p>
+              </div>
+              <div class="panel-body"> 
+                <p>
+                  <%= f.body %>
+                </p>
+              </div>
+            </div>
+          <% end %>
+          <h2>Add a comment:</h2>
+          <%= form_for([post, post.comments.build]) do |t| %>
+            <p>
+              <%= t.text_area :body, style: "min-width: 100%", rows: "5"%>
+            </p>
     			<div class="modal-footer">
-    				<%= f.button 'Save', :class => 'btn btn-primary' %>
-    				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <p>
+                <%= t.button 'Save', :class => 'btn btn-primary' %>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </p>
+            <% end %>
     			</div>
-    		<% end %>
       </div>
     </div>
   </div>

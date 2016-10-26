@@ -20,28 +20,28 @@
   			<div class="panel-body">
         <%= render 'modal', post: f %>
         <%= render "comments", post: f %>
-						<ul class="nav navbar-nav navbar-right">
+						<ul class="nav navbar-nav">
             <li>
 
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="comments" data-target="#post-<%= f.id %>">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post-comments-<%= f.id %>">
                 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
               </button>   
             </li>
                 <li>
                   <% if logged_in? && current_user == f.user %>           
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#edit-post-<%= f.id %>">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-post-<%= f.id %>">
                       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </button>    
                     </li>
     						    <li> 
-                      <%= button_to f, method: :delete, remote: true, class: "btn btn-primary btn-lg" do %>
+                      <%= button_to f, method: :delete, remote: true, class: "btn btn-primary" do %>
                         <span class="glyphicon glyphicon-trash"></span>
                       <% end %>
+                    </li>
                   <% end %>
 						 </ul>
-            <small>Created By <%= f.user %></small>
-
 					</div>
+           <small>Created By <%= f.user.username %></small>
 		  		</li>
 		  	</div>
 		</div>
