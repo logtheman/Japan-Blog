@@ -5,12 +5,13 @@
     <th>Description</th>
     <th colspan="2"></th>
   </tr>
-	<%= @posts.each do |f| %>
+	<%= @posts.each, :html => { :multipart => true } do |f| %>
 		<tr>
 			<td><%= f.created_at %></td>
 			<td><%= f.title %></td>
 			<td><%= f.description %></td>
 			<td><%= f.tag_list %></td>
+			<td><%= f.file_field :image %></td>
 			<td>
 			<div class="dropdown">
 				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

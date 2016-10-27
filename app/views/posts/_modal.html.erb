@@ -8,7 +8,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <%= form_for post do |f| %>
+        <%= form_for post, :html => { :multipart => true } do |f| %>
     			<p>
     				<%= f.label :title %><br>
     				<%= f.text_field :title %>
@@ -19,8 +19,10 @@
     			</p>
           <p>
             <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-
             <%= f.text_field :tag_list, size: '40x8' %>
+          </p>
+          <p>
+            Add image: <%= f.file_field :image %>
           </p>
 
     			<div class="modal-footer">

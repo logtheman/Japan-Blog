@@ -31,6 +31,9 @@ gem 'acts-as-taggable-on', '~> 4.0'
 #Add User Auth
 gem 'devise'
 
+#add images
+gem "paperclip", "~> 5.0.0"
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
