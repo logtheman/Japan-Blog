@@ -18,6 +18,10 @@
               <%= image_tag f.image.url(:small) %>
           </div>
         <% end %>
+        <% f.attachements.each do |a| %>
+          <%= image_tag a.image.url(:small) %>
+        <% end %>
+
         <div class="panel-body">
           <li>Tags: <%= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
         </div>

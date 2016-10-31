@@ -34,6 +34,11 @@ gem 'devise'
 #add images
 gem "paperclip", "~> 5.0.0"
 
+#add jquery uploader
+gem "jquery-fileupload-rails"
+
+#add nest form for image upload
+gem "nested_form"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
