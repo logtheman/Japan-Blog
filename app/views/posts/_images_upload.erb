@@ -1,5 +1,5 @@
 Add Mutiple Images:
-<%= post.fields_for :attachements do |attachements_form| %>
- <%= attachements_form.file_field :attachement, :multiple => true %>
+<%= post.fields_for :attachement do |attachements_form| %>
+ <%= attachements_form.file_field :attachement, :multiple => true, name: "attachments[image][]" %>
 <% end %>
 <br />

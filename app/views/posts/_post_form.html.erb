@@ -12,11 +12,7 @@
 		<%= f.text_field :tag_list, size: '40x8' %>
 	</p>
 	<p>
-<!--	<%= render 'images_upload', :post => f %>  -->
-	Add Mutiple Images:
-	<%= f.fields_for :attachements do |attachements_form| %>
- 		<%= attachements_form.file_field :attachement, :multiple => true %>
-	<% end %>
+	<%= render 'images_upload', :post => f %>  
 
 	<br />
 		Add image: <%= f.file_field :image %>
