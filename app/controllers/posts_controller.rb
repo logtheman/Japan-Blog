@@ -43,6 +43,10 @@ class PostsController < ApplicationController
 	  @post = Post.new(post_params)
     @post.user_id = current_user.id
     	if @post.save
+        params[:attachments]['image'].each do |a|
+          flash[:danger] = "Your are not allowed"
+          @attachement = @post.attachements.create!(:image => a)
+        end
       	redirect_to posts_path
     	end
     end	
@@ -51,9 +55,8 @@ class PostsController < ApplicationController
     	@post = current_user.posts.find(params[:id])
 
     	if @post.update(post_params)
+
     		redirect_to posts_path 
- #   	else
- #   		render 'edit'
     	end
     end
 
@@ -67,7 +70,7 @@ class PostsController < ApplicationController
 	 
   	private
   		def post_params
-    		params.require(:post).permit(:title, :description, :tag_list, :image, :attachable, attachement_attributes: [:id, :image])
+    		params.require(:post).permit(:title, :description, :tag_list, :image, attachements_attributes: [:id, :post_id, :image])
   		end
 
 
