@@ -14,9 +14,13 @@
 	<p>
 	<%= render 'images_upload', :post => f %>  
 
-	<br />
-		Add image: <%= f.file_field :image %>
-	</p>
+	<% pass_post.attachements.each do |a| %>
+		<%= image_tag a.image.url(:small) %>
+		
+			<%= link_to "Edit Image", edit_post_attachement_path(pass_post, a) %>
+		
+		<%#= link_to "Delete Picture", a.image.delete %>
+	<% end %>
 
 	<div class="modal-footer">
 	<%= f.button 'Save', :class => 'btn btn-primary' %>

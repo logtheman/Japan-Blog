@@ -36,6 +36,8 @@ class PostsController < ApplicationController
 
 	def edit
 		@post = current_user.posts.find(params[:id])
+    
+    
     #current_user validation 
 	end
 
@@ -70,7 +72,7 @@ class PostsController < ApplicationController
 	 
   	private
   		def post_params
-    		params.require(:post).permit(:title, :description, :tag_list, :image, attachements_attributes: [:id, :post_id, :image])
+    		params.require(:post).permit(:title, :description, :tag_list, :image, attachements: [:id, :post_id])
   		end
 
 
