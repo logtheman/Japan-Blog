@@ -22,13 +22,13 @@ class AttachementsController < ApplicationController
   end
 
   def edit
-     @attachement = Attachement.find(params[:id])
-     @attachments.update!(attachement_params)
+   #  @attachement = Attachement.find(params[:id])
+  #   @attachments.update!(attachement_params)
   end
 
     private
       def attachement_params
-        params.require(:attachement).permit(:image)
+ #       params.require(:attachement).permit(:image)
       end
 
 end

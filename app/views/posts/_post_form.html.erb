@@ -11,15 +11,34 @@
 		<%= f.label :tag_list, "Tags (separated by commas)" %><br />
 		<%= f.text_field :tag_list, size: '40x8' %>
 	</p>
+
+	<p>
+		<form>
+      <input id="geocomplete" type="text" placeholder="Type in a location" value="Tokyo" />
+      <input id="find" type="button" value="find" />
+	      <div class="details">
+			<br / >
+	        <%= f.label :lat %>
+	        <%= f.text_field :lat, name: "lat", type: "text" %>
+     		<br />
+     		<%= f.label :lng %>
+	        <%= f.text_field :lng, name: "lng", type: "text" %>
+
+          </div>
+	    </form>
+	    <form>
+	    		
+
+
+    </p>
 	<p>
 	<%= render 'images_upload', :post => f %>  
 
 	<% pass_post.attachements.each do |a| %>
 		<%= image_tag a.image.url(:small) %>
+		<%#= a_form.file_field :image %>
+		<%#= link_to "Edit Image", edit_post_attachement_path(a) %>
 		
-			<%= link_to "Edit Image", edit_post_attachement_path(pass_post, a) %>
-		
-		<%#= link_to "Delete Picture", a.image.delete %>
 	<% end %>
 
 	<div class="modal-footer">
@@ -27,3 +46,20 @@
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	</div>
 <% end %>
+
+	<script>
+
+ 
+	$(document).ready(function() {
+	  $("#geocomplete").geocomplete({
+          details: "form",
+          types: ["geocode", "establishment"],
+        });
+
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        });
+      });
+	
+
+    </script>

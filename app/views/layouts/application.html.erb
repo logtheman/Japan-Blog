@@ -14,8 +14,6 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="text/javascript"> $(function ()
-    { $("#myModal").modal({show:false }); </script>
   </head>
 <body>
 
@@ -92,6 +90,7 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
-
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-CClVVnN2RnG6ICiyr-Vh_qLgQpbYhU0&libraries=places"></script>
+  <script src="./assets/jquery.geocomplete.js"></script>
 </body>
 </html>
