@@ -13,25 +13,18 @@
 	</p>
 
 	<p>
-		<form>
-      <input id="geocomplete" type="text" placeholder="Type in a location" value="Tokyo" />
-      <input id="find" type="button" value="find" />
-	      <div class="details">
-			<br / >
-	        <%= f.label :lat %>
-	        <%= f.text_field :lat, name: "lat", type: "text" %>
-     		<br />
-     		<%= f.label :lng %>
-	        <%= f.text_field :lng, name: "lng", type: "text" %>
+	
+    <input id="geocomplete" type="text" placeholder="Type in a location" value="Tokyo" />
+    <input id="find" type="button" value="find" />
+	<div class="details">
+	        <%#= f.label :lat %>
+	        <%= f.text_field :lat, name: "lat", type: "hidden" %>
+     		<%#= f.label :lng %>
+	        <%= f.text_field :lng, name: "lng", type: "hidden" %>
+	        <%= f.text_field :location, name: "formatted_address", type: "text" %>
 
-          </div>
-	    </form>
-	    <form>
+     </div>
 	    		
-
-
-    </p>
-	<p>
 	<%= render 'images_upload', :post => f %>  
 
 	<% pass_post.attachements.each do |a| %>

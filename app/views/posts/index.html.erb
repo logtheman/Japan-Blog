@@ -28,6 +28,10 @@
           <li>Tags: <%= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
         </div>
 
+        <div class="panel-body">
+          <li><%= f.lat %></li>
+        </div>
+
   			<div class="panel-body">
         <%= render 'modal', post: f %>
         <%= render "comments", post: f %>

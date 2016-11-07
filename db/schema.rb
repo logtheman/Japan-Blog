@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107012407) do
+ActiveRecord::Schema.define(version: 20161107034705) do
 
   create_table "attachements", force: :cascade do |t|
     t.text     "description"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20161107012407) do
     t.datetime "image_updated_at"
     t.decimal  "lat",                precision: 10, scale: 6
     t.decimal  "lng",                precision: 10, scale: 6
+    t.string   "location"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
