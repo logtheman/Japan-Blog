@@ -13,26 +13,22 @@
 	</p>
 
 	<p>
-	
-    <input id="geocomplete" type="text" placeholder="Type in a location" value="Tokyo" />
-    <input id="find" type="button" value="find" />
-	<div class="details">
-	        <%#= f.label :lat %>
-	        <%= f.text_field :lat, name: "lat", type: "hidden" %>
-     		<%#= f.label :lng %>
-	        <%= f.text_field :lng, name: "lng", type: "hidden" %>
-	        <%= f.text_field :location, name: "formatted_address", type: "text" %>
+		<%= f.text_field :location, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
+		<%= f.button :location, id: "find", type: "button", value: "Type in a location"  %>
 
+	<div class="details">
+	        <%= f.text_field :lat, name: "lat", as: "text" %>
+	        <%= f.text_field :lng, name: "lng", type: "text" %>
+	        <%=f.hidden_field :lat , id: "lat" %>
+    		<%=f.hidden_field :lng , id: "lng" %>
      </div>
 	    		
 	<%= render 'images_upload', :post => f %>  
 
-	<% pass_post.attachements.each do |a| %>
-		<%= image_tag a.image.url(:small) %>
-		<%#= a_form.file_field :image %>
-		<%#= link_to "Edit Image", edit_post_attachement_path(a) %>
-		
-	<% end %>
+		<%= f.fields_for :attachements do |fa| %>
+			<%= fa.check_box "_destroy" %>
+			<%= image_tag fa.object.image.url(:small) %>
+		<% end %>
 
 	<div class="modal-footer">
 	<%= f.button 'Save', :class => 'btn btn-primary' %>

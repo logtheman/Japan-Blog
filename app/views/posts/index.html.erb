@@ -26,11 +26,10 @@
         
         <div class="panel-body">
           <li>Tags: <%= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
+          <li>Location: <%= f.location %></li>
+          <li>Latitude: <%= f.lat %>, Longitude: <%= f.lng %></li>
         </div>
 
-        <div class="panel-body">
-          <li><%= f.lat %></li>
-        </div>
 
   			<div class="panel-body">
         <%= render 'modal', post: f %>
