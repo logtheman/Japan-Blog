@@ -60,7 +60,7 @@ class PostsController < ApplicationController
     	@post = current_user.posts.find(params[:id])
 
     	if @post.update(post_params)
-
+        #@post.update_attr(post_params)
     		redirect_to posts_path 
     	end
     end
@@ -75,7 +75,7 @@ class PostsController < ApplicationController
 	 
   	private
   		def post_params
-    		params.require(:post).permit(:title, :description, :tag_list, :lat, :lng, :location, :image, attachements_attributes: [:id, :post_id,:_destroy])
+    		params.require(:post).permit(:title, :description, :tag_list, :lat, :lng, :location, :image, attachements_attributes: [:id, :post_id,:_destroy, :image])
   		end
 
 

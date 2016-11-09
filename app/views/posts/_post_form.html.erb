@@ -25,10 +25,14 @@
 	    		
 	<%= render 'images_upload', :post => f %>  
 
-		<%= f.fields_for :attachements do |fa| %>
-			<%= fa.check_box "_destroy" %>
-			<%= image_tag fa.object.image.url(:small) %>
-		<% end %>
+	<%= f.fields_for :attachements do |fa| %>
+		<div class="center-block">
+			Change Image:<%= fa.file_field :image %>
+			Delete Image <%= fa.check_box "_destroy" %><br />
+			<%= image_tag fa.object.image.url(:small), class: "img-thumbnail" %>
+			<br />
+		</div>
+	<% end %>
 
 	<div class="modal-footer">
 	<%= f.button 'Save', :class => 'btn btn-primary' %>
