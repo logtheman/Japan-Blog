@@ -2,9 +2,6 @@
 	<p>
 		<%= f.label :title %><br>
 		<%= f.text_field :title %>
-
-		<%= f.label :lat %>
-		<%= f.text_field :lat %>
 	</p>
 	<p>
 		<%= f.label :description %><br>
@@ -16,15 +13,14 @@
 	</p>
 
 	<p>
-		Location: <%= f.text_field :location, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
+		<%= f.label :loc_name, "Add a location" %><br />
+		<%= f.text_field :loc_name, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
+		<%=f.hidden_field :lng, id: "lng" %>
+    	<%=f.hidden_field :lat, id: "lat" %>
+    	<%=f.hidden_field :loc_name, id: "formatted_address" %>
 
 	</p>
-	<p>
-	        <%#= f.text_field :lat, name: "lat", id: "geocomplete" %>
-	        <%= f.text_field :lng, name: "lng" %>
-	 </p>
-	        <%#=f.hidden_field :lat , name: "lat" %>
-    		<%=f.hidden_field :lng , name: "lng", id: "lng" %>
+
 
 
 	    		
@@ -52,10 +48,10 @@
 	  $("#geocomplete").geocomplete({
           details: "form",
           types: ["geocode", "establishment"],
+          detailsAttribute: "id"
         });
 
-	  	
-	  	$("#hiddenObject").val($("lng").html());
+	  
 
       });
 	

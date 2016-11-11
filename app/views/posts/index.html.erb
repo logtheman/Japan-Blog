@@ -26,7 +26,7 @@
         
         <div class="panel-body">
           <li>Tags: <%= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
-          <li>Location: <%= f.location %></li>
+          <li>Location: <%= f.loc_name %></li>
           <li>Latitude: <%= f.lat %>, Longitude: <%= f.lng %></li>
         </div>
 
