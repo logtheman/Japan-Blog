@@ -45,9 +45,7 @@ class PostsController < ApplicationController
 	  @post = Post.new(post_params)
     @post.user_id = current_user.id
     	if @post.save 
-        if params[:attachments].nil?
-          
-        else
+        if params[:attachments].present?
           params[:attachments]['image'].each do |a|
             @attachement = @post.attachements.create!(:image => a)
           end
@@ -60,7 +58,13 @@ class PostsController < ApplicationController
     	@post = current_user.posts.find(params[:id])
 
     	if @post.update(post_params)
-        #@post.update_attr(post_params)
+          if params[:attachments].present?
+            params[:attachments]['image'].each do |a|
+              @attachement = @post.attachements.create!(:image => a)
+            end
+          end
+
+
     		redirect_to posts_path 
     	end
     end

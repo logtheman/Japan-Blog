@@ -1,7 +1,10 @@
-<%= form_for pass_post, :html => { :multipart => true } do |f| %>
+<%= form_for pass_post, id: "postform", :html => { :multipart => true } do |f| %>
 	<p>
 		<%= f.label :title %><br>
 		<%= f.text_field :title %>
+
+		<%= f.label :lat %>
+		<%= f.text_field :lat %>
 	</p>
 	<p>
 		<%= f.label :description %><br>
@@ -13,20 +16,22 @@
 	</p>
 
 	<p>
-		<%= f.text_field :location, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
-		<%= f.button :location, id: "find", type: "button", value: "Type in a location"  %>
+		Location: <%= f.text_field :location, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
 
-	<div class="details">
-	        <%= f.text_field :lat, name: "lat", as: "text" %>
-	        <%= f.text_field :lng, name: "lng", type: "text" %>
-	        <%=f.hidden_field :lat , id: "lat" %>
-    		<%=f.hidden_field :lng , id: "lng" %>
-     </div>
+	</p>
+	<p>
+	        <%#= f.text_field :lat, name: "lat", id: "geocomplete" %>
+	        <%= f.text_field :lng, name: "lng" %>
+	 </p>
+	        <%#=f.hidden_field :lat , name: "lat" %>
+    		<%=f.hidden_field :lng , name: "lng", id: "lng" %>
+
+
 	    		
 	<%= render 'images_upload', :post => f %>  
 
 	<%= f.fields_for :attachements do |fa| %>
-		<div class="center-block">
+		<div class="modal-pictures">
 			Change Image:<%= fa.file_field :image %>
 			Delete Image <%= fa.check_box "_destroy" %><br />
 			<%= image_tag fa.object.image.url(:small), class: "img-thumbnail" %>
@@ -35,7 +40,7 @@
 	<% end %>
 
 	<div class="modal-footer">
-	<%= f.button 'Save', :class => 'btn btn-primary' %>
+	<%= f.button 'Save', id: "save-button", :class => 'btn btn-primary' %>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	</div>
 <% end %>
@@ -49,9 +54,9 @@
           types: ["geocode", "establishment"],
         });
 
-        $("#find").click(function(){
-          $("#geocomplete").trigger("geocode");
-        });
+	  	
+	  	$("#hiddenObject").val($("lng").html());
+
       });
 	
 

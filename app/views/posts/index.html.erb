@@ -38,18 +38,22 @@
             <li>
 
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post-comments-<%= f.id %>">
-                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                <!--<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><br />-->
+                Comment
+                <span class="badge"><%= f.comments.count %></span>
               </button>   
             </li>
                 <li>
                   <% if logged_in? && current_user == f.user %>           
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-post-<%= f.id %>">
-                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                      Edit Post
+                     <!-- <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>-->
                     </button>    
                     </li>
     						    <li> 
                       <%= button_to f, method: :delete, remote: true, class: "btn btn-primary" do %>
-                        <span class="glyphicon glyphicon-trash"></span>
+                        Delete Post
+                        <!--<span class="glyphicon glyphicon-trash"></span>-->
                       <% end %>
                     </li>
                   <% end %>
