@@ -6,7 +6,7 @@
 <ul class="post">
 	<% @posts.each do |f| %>
   		<li>Posted: <%= f.created_at.strftime('%D') %></li>
-  		<div class="panel panel-primary">
+  		<div class="panel panel-primary" id="post-container">
   		  <div class="panel-heading">
   				<h3 class="panel-title"><li><%= f.title %> </li></h3>
   			</div>
@@ -20,7 +20,7 @@
         <% end %>
         <div class="panel-body">
           <% f.attachements.each do |a| %>
-            <%= image_tag a.image.url(:small) %>
+            <%= image_tag a.image.url(:small), class: "post-img" %>
           <% end %>
         </div>
         
@@ -66,3 +66,7 @@
   	<% end %>
 </ul>
 
+
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
