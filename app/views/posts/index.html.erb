@@ -10,19 +10,19 @@
       		<li>Posted: <%= f.created_at.strftime('%D') %></li>
       		<div class="panel panel-primary" id="post-container">
       		  <div class="panel-heading">
-      				<h3 class="panel-title"><li><%= f.title %> </li></h3>
+      				<h2 class="panel-title"><li><%= f.title %> </li></h2>
       			</div>
       			<div class="panel-body flex-text">
       				<li><%= f.description %></li>
       			</div>
             <% if f.image.exists? %>
-              <div class="panel-body">
-                  <%= image_tag f.image.url(:small), class: "post-img flex-row" %>
+              <div class="panel-body ">
+                  <%= image_tag f.image.url(:large), class: "post-img flex-row" %>
               </div>
             <% end %>
             <div class="panel-body ">
               <% f.attachements.each do |a| %>
-                <%= image_tag a.image.url(:small), class: "post-img flex-row" %>
+                <%= image_tag a.image.url(:large), class: "post-img flex-row" %>
               <% end %>
             </div>
             
@@ -39,7 +39,7 @@
     						<ul class="nav navbar-nav">
                 <li>
 
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post-comments-<%= f.id %>">
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#post-comments-<%= f.id %>">
                     <!--<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><br />-->
                     Comment
                     <span class="badge"><%= f.comments.count %></span>
@@ -47,13 +47,13 @@
                 </li>
                     <li>
                       <% if logged_in? && current_user == f.user %>           
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-post-<%= f.id %>">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-post-<%= f.id %>">
                           Edit Post
                          <!-- <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>-->
                         </button>    
                         </li>
         						    <li> 
-                          <%= button_to f, method: :delete, remote: true, class: "btn btn-primary" do %>
+                          <%= button_to f, method: :delete, remote: true, class: "btn btn-primary btn-sm" do %>
                             Delete Post
                             <!--<span class="glyphicon glyphicon-trash"></span>-->
                           <% end %>
