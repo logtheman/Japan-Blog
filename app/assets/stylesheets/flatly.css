@@ -13,6 +13,10 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
+  font-family: 'Prociono', serif;
+  font-family: 'Lora', serif;
+  font-family: 'Proza Libre', sans-serif;
+
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -1086,7 +1090,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Lora','Proza Libre','Prociono', "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.42857143;
   color: #2c3e50;

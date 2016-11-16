@@ -1,70 +1,47 @@
 
-<%= render 'modal', post: Post.new %>
+
 
 <!-- Post Body-->
+<section class="post-nav">
+  <div class="sort-bar" >
+  <ul id="post-tabs" class="nav nav-tabs">
+      <li class=""><a href="#most-recent" data-toggle="tab">Most Recent</a></li>
+      <li class="sort-active"><a href="#popular" data-toggle="tab">Oldest</a></li>
+      <li class=""><a href="#growth" data-toggle="tab">Most Popular</a></li>
+      <li class=""><a href="#support" data-toggle="tab">Most Viewed</a></li>
+      <li class=""><a href="#culture" data-toggle="tab">Most Comments</a></li>
+  </ul>
+</section>
+
 
 <ul class="post card-deck-wrapper">
   <div class="flex-row row">
 	<% @posts.each do |f| %>
       <div class="col-xs-6 col-sm-4 col-lg-3">
-      		<li>Posted: <%= f.created_at.strftime('%D') %></li>
+      		<li> <%#= f.created_at.strftime('%D') %></li>
       		<div class="panel panel-primary" id="post-container">
-      		  <div class="panel-heading">
-      				<h2 class="panel-title"><li><%= f.title %> </li></h2>
-      			</div>
-      			<div class="panel-body flex-text">
-      				<li><%= f.description %></li>
-      			</div>
-            <% if f.image.exists? %>
-              <div class="panel-body ">
-                  <%= image_tag f.image.url(:large), class: "post-img flex-row" %>
-              </div>
-            <% end %>
-            <div class="panel-body ">
-              <% f.attachements.each do |a| %>
-                <%= image_tag a.image.url(:large), class: "post-img flex-row" %>
-              <% end %>
+
+            <div class="">
+              <li>
+              <%# f.attachements.first do |a| %>
+                <%#= image_tag a.image.url(:large), class: "post-img flex-row" %>
+              <%# end %>
+              <%= image_tag f.attachements.first.image.url(:large), class: "post-img flex-row" %>
+              </li>
             </div>
-            
-            <div class="panel-body flex-text">
-              <li>Tags: <%= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
-              <li>Location: <%= f.loc_name %></li>
-              <li>Latitude: <%= f.lat %>, Longitude: <%= f.lng %></li>
+            <div class="card-block">
+              <li><h4 class="card-title"><%= f.title %></h4></li>
+                <div class="panel-body flex-text">
+                  <li><%#= f.description %><%=h truncate(f.description, :length => 80) %></li>
+                </div>
+                <a href="" id="read-more"><h4>Read more &#8605;</h4></a>
             </div>
 
 
-      			<div class="panel-body">
-            <%= render 'modal', post: f %>
-            <%= render "comments", post: f %>
-    						<ul class="nav navbar-nav">
-                <li>
-
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#post-comments-<%= f.id %>">
-                    <!--<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><br />-->
-                    Comment
-                    <span class="badge"><%= f.comments.count %></span>
-                  </button>   
-                </li>
-                    <li>
-                      <% if logged_in? && current_user == f.user %>           
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-post-<%= f.id %>">
-                          Edit Post
-                         <!-- <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>-->
-                        </button>    
-                        </li>
-        						    <li> 
-                          <%= button_to f, method: :delete, remote: true, class: "btn btn-primary btn-sm" do %>
-                            Delete Post
-                            <!--<span class="glyphicon glyphicon-trash"></span>-->
-                          <% end %>
-                        </li>
-                      <% end %>
-    						 </ul>
-    					</div>
-               <small>Created By <%= f.user.username %></small>
-    		  		</li>
     		  	</div>
+            <small>Posted by <%= f.user.username %></small>
 		  </div>
+
   	<% end %>
     </div>
 </ul>

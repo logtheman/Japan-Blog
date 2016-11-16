@@ -1,15 +1,8 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :get_post, only: [:edit, :update, :destroy]
   before_action :same_user , only: [:edit,:update,:destroy]
 
-  def check_auth
-
-  end
-
-  def get_post
-    @post = Post.find(params[:id])
-  end
 
   def index
     @posts = Post.all
@@ -76,7 +69,11 @@ class PostsController < ApplicationController
 	    redirect_to posts_path
 	  end
 
-	 
+	   private
+       def get_post
+        @post = Post.find(params[:id])
+      end
+
   	private
   		def post_params
     		params.require(:post).permit(:title, :description, :tag_list, :lat, :lng, :loc_name, :image, 

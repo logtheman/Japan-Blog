@@ -14,11 +14,18 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Calligraffitti|Lora|Prociono|Proza+Libre" rel="stylesheet">
   </head>
 <body>
 
+<% if user_signed_in? %>
+  <%= render 'modal', post: Post.new %>
+<% else %>
   <%= render "welcome/login_modal" %>                 
   <%= render "welcome/sign_up_modal" %> 
+<% end %>
+
+
 
   <%= stylesheet_link_tag "posts" %>
 
@@ -57,11 +64,13 @@
             <li><%= link_to 'Oldest Article', 'posts?sort_by=date_oldest' %></li>
           </ul>
               </li>
+              <% if user_signed_in? %>
               <li>
                   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-post">
                     Write New Post
                   </button>
                 </li>
+                <% end %>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
@@ -80,11 +89,9 @@
 
   <!-- Header Section -->
   <header>
-
-  <div class="container">
-      <div class="page-header">
-        <%=image_tag("japan-banner2.jpg", class: "banner-image")%>
-      </div>
+    <div class="page-header">
+      <%=image_tag("japan-banner2.jpg", class: "banner-image")%>
+  </div>
   </header>
 
 <%= yield %>
