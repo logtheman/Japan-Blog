@@ -1,12 +1,13 @@
 
+  
 
 
 <!-- Post Body-->
 <section class="post-nav">
   <div class="sort-bar" >
   <ul id="post-tabs" class="nav nav-tabs">
-      <li class=""><a href="#most-recent" data-toggle="tab">Most Recent</a></li>
-      <li class="sort-active"><a href="#popular" data-toggle="tab">Oldest</a></li>
+      <li class=""><%= nav_link( 'Most Recent', 'posts?sort_by=date_newest') %></li>
+      <li class=""><%= nav_link('Oldest', 'posts?sort_by=date_oldest') %></li>
       <li class=""><a href="#growth" data-toggle="tab">Most Popular</a></li>
       <li class=""><a href="#support" data-toggle="tab">Most Viewed</a></li>
       <li class=""><a href="#culture" data-toggle="tab">Most Comments</a></li>
@@ -17,6 +18,8 @@
 <ul class="post card-deck-wrapper">
   <div class="flex-row row">
 	<% @posts.each do |f| %>
+
+
       <div class="col-xs-6 col-sm-4 col-lg-3">
       		<li> <%#= f.created_at.strftime('%D') %></li>
       		<div class="panel panel-primary" id="post-container">
@@ -34,7 +37,9 @@
                 <div class="panel-body flex-text">
                   <li><%#= f.description %><%=h truncate(f.description, :length => 80) %></li>
                 </div>
-                <a href="" id="read-more"><h4>Read more &#8605;</h4></a>
+                <%= render "display", post: f %>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#post-display-<%= f.id %>">Read More</button>
+
             </div>
 
 

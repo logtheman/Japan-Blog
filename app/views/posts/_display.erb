@@ -1,0 +1,42 @@
+<% id = "post-display-#{post.id}" %>
+<div class="modal fade bd-example-modal-lg" id="<%= id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="card-block">
+
+
+        <li><h4 class="card-title"><%= post.title %></h4></li>
+
+        <div class="panel-body flex-text">
+          <li><%= post.description %></li>
+        </div>
+
+        <div class="panel-body flex-text">
+          <li>Tags: <%= raw post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
+          <li>Location: <%= post.loc_name %></li>
+          <li>Latitude: <%= post.lat %>, Longitude: <%= post.lng %></li>
+        </div>
+      </div>
+        <% post.attachements.each do |a| %>
+          <%= image_tag a.image.url(:large), class: "flex-row modal-pictures" %>
+        <% end %>
+
+      <div class="panel-body">
+
+          <ul class="nav navbar-nav">
+
+             
+                <% if logged_in? && current_user == post.user %>           
+
+                  <li> 
+                    <%= button_to post, method: :delete, remote: true, class: "btn btn-primary btn-sm" do %>
+                      Delete Post
+                    <% end %>
+                  </li>
+                <% end %>
+           </ul>
+        </div>
+      </div>
+  </div>
+</div>

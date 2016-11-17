@@ -106,7 +106,9 @@
 }
 
 .modal-pictures {
-	float: center;
+	float: center;	
+	height: auto;
+	width: 200px;
 }
 
 
