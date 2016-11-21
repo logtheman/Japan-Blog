@@ -29,6 +29,7 @@
 .flex-row img {
 	min-width: 0;
 	width: 100%;
+	max-height: 200px;
 }
 
 .page-header{
@@ -62,6 +63,7 @@
 }
 
 
+
 .card-title{
 	font-weight: 300;
 	font-size: 2rem;
@@ -92,8 +94,19 @@
 
 #post-container {
 	border: none;
+	background-color: rgba(255, 249, 249 .1);
+	margin-bottom: .1em;
 
 }
+
+#post-container:hover{
+	-webkit-box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);
+	box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);
+	background-color: rgba(232, 242, 255, .6);
+
+}
+
 
 .post_buttons {
 	text-align: center;
@@ -114,6 +127,7 @@
 
 .post-img {
 
+
 }
 /*
 .post-img { 
@@ -124,6 +138,6 @@
 }
 */
 body{
-
-	background-color: rgba(0, 50, 132, .05);
+	background-color: rgba(255, 249, 249, .1);
+	/*background-color: rgba(198, 198, 198, .3);*/
 }

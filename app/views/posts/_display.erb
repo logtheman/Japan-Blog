@@ -25,14 +25,17 @@
       <div class="panel-body">
 
           <ul class="nav navbar-nav">
-
-             
                 <% if logged_in? && current_user == post.user %>           
 
                   <li> 
                     <%= button_to post, method: :delete, remote: true, class: "btn btn-primary btn-sm" do %>
                       Delete Post
                     <% end %>
+                  </li>
+                  <%= render "comments", post: post %>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-post-<%= post.id %>">
+                      Edit Post
+                    </button>    
                   </li>
                 <% end %>
            </ul>
