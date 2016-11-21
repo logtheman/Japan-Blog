@@ -26,7 +26,14 @@
 .flex-text {
 	flex-grow: 1;
 }
+/*
 .flex-row img {
+	min-width: 0;
+	width: 100%;
+	max-height: 200px;
+}
+*/
+.post-img {
 	min-width: 0;
 	width: 100%;
 	max-height: 200px;
@@ -118,26 +125,22 @@
 	z-index: 1051;
 }
 
-.modal-pictures {
-	float: center;	
-	height: auto;
-	width: 200px;
+.modal-pictures {	
+
+	margin-top: 1em;
+	width: 50%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
-.post-img {
-
-
+.map_canvas {
+    width: 80%;
+    height: 400px;
+    margin: 10px 20px 10px 0;
+    z-index: 1053;
 }
-/*
-.post-img { 
-	transition: all .1s ease-in-out; 
-}
-.post-img:hover { 
-	transform: scale(1.4); 
-}
-*/
+
 body{
 	background-color: rgba(255, 249, 249, .1);
-	/*background-color: rgba(198, 198, 198, .3);*/
 }

@@ -12,18 +12,7 @@
 		<%= f.text_field :tag_list, size: '40x8' %>
 	</p>
 
-	<p>
-		<%= f.label :loc_name, "Add a location" %><br />
-		<%= f.text_field :loc_name, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
-		<%=f.hidden_field :lng, id: "lng" %>
-    	<%=f.hidden_field :lat, id: "lat" %>
-    	<%=f.hidden_field :loc_name, id: "formatted_address" %>
 
-	</p>
-
-
-
-	    		
 	<%= render 'images_upload', :post => f %>  
 
 	<%= f.fields_for :attachements do |fa| %>
@@ -35,25 +24,21 @@
 		</div>
 	<% end %>
 
+	<p>
+		<%= f.label :loc_name, "Add a location" %><br />
+		<%= f.text_field :loc_name, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
+		<%=f.hidden_field :lng, id: "lng" %>
+    	<%=f.hidden_field :lat, id: "lat" %>
+    	<%=f.hidden_field :loc_name, id: "formatted_address" %>
+	</p>
+
+	<div class="map_canvas"></div>
+
+
 	<div class="modal-footer">
 	<%= f.button 'Save', id: "save-button", :class => 'btn btn-primary' %>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	</div>
 <% end %>
 
-	<script>
-
- 
-	$(document).ready(function() {
-	  $("#geocomplete").geocomplete({
-          details: "form",
-          types: ["geocode", "establishment"],
-          detailsAttribute: "id"
-        });
-
-	  
-
-      });
 	
-
-    </script>

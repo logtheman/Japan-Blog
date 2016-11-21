@@ -1,5 +1,19 @@
 
-  
+  <script>
+
+    $(document).ready(function() {
+      var map = $("#geocomplete").geocomplete({
+            details: "form",
+            types: ["geocode", "establishment"],
+            detailsAttribute: "id",
+            map: ".map_canvas",
+          }).bind("geocode:result", function(event, result){
+            console.log(result);
+            google.maps.event.trigger(map, "resize");
+
+        });});
+
+    </script>
 
 
 <!-- Post Body-->
@@ -39,6 +53,7 @@
                 </div>
                 <%= render "display", post: f %>
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#post-display-<%= f.id %>">Read More</button>
+                <!--Tags: <%#= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>-->
 
             </div>
 

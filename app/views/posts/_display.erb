@@ -12,10 +12,10 @@
           <li><%= post.description %></li>
         </div>
 
-        <div class="panel-body flex-text">
-          <li>Tags: <%= raw post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
+        <div class="panel-body">
+          <li class="">Tags: <%= raw post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
           <li>Location: <%= post.loc_name %></li>
-          <li>Latitude: <%= post.lat %>, Longitude: <%= post.lng %></li>
+          <!--li>Latitude: <%#= post.lat %>, Longitude: <%#= post.lng %></li>-->
         </div>
       </div>
         <% post.attachements.each do |a| %>
@@ -26,14 +26,13 @@
 
           <ul class="nav navbar-nav">
                 <% if logged_in? && current_user == post.user %>           
-
+                  <%= render 'modal', post: post %>
                   <li> 
                     <%= button_to post, method: :delete, remote: true, class: "btn btn-primary btn-sm" do %>
                       Delete Post
                     <% end %>
                   </li>
-                  <%= render "comments", post: post %>
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-post-<%= post.id %>">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-dismiss="" data-target="#edit-post-<%= post.id %>">
                       Edit Post
                     </button>    
                   </li>
