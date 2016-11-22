@@ -62,9 +62,7 @@
               <li class="dropdown">
               <% if user_signed_in? %>
               <li>
-                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-post">
-                    Write New Post
-                  </button>
+                  <%= link_to 'Write New Post', new_post_path(), type: "button", class: "btn btn-primary btn-lg" %>
                 </li>
                 <% end %>
             </ul>

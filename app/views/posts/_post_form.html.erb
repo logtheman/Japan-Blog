@@ -1,44 +1,48 @@
-<%= form_for pass_post, id: "postform", :html => { :multipart => true } do |f| %>
-	<p>
-		<%= f.label :title %><br>
-		<%= f.text_field :title %>
-	</p>
-	<p>
-		<%= f.label :description %><br>
-		<%= f.text_area :description, style: "min-width: 100%", rows: "5" %> 
-	</p>
-	<p>
-		<%= f.label :tag_list, "Tags (separated by commas)" %><br />
-		<%= f.text_field :tag_list, size: '40x8' %>
-	</p>
+<div class="post post-show">
+	<% if @post.nil? %>
+		<% @post = Post.new %>
+	<% end %>
+	<%= form_for @post, id: "postform", :html => { :multipart => true } do |f| %>
+		
+		<h4 class="card-title">
+			<%= f.label :title %><br>
+			<%= f.text_field :title %>
+		</h4>
+	<div class="panel-body flex-text">
+			<%= f.label :description %><br>
+			<%= f.text_area :description, style: "min-width: 100%", rows: "5" %> 
+		
+		<p>
+			<%= f.label :tag_list, "Tags (separated by commas)" %><br />
+			<%= f.text_field :tag_list, size: '40x8' %>
+		</p>
+
+		<%= render 'images_upload', :post => f %>  
+
+		<%= f.fields_for :attachements do |fa| %>
+			<div class="modal-pictures">
+				Change Image:<%= fa.file_field :image %>
+				Delete Image <%= fa.check_box "_destroy" %><br />
+				<%= image_tag fa.object.image.url(:small), class: "img-thumbnail" %>
+				<br />
+			</div>
+		<% end %>
+
+		<p>
+			<%= f.label :loc_name, "Add a location" %><br />
+			<%= f.text_field :loc_name, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
+			<%=f.hidden_field :lng, id: "lng" %>
+	    	<%=f.hidden_field :lat, id: "lat" %>
+	    	<%=f.hidden_field :loc_name, id: "formatted_address" %>
+		</p>
+	</div>
+		<div class="map_canvas"></div>
 
 
-	<%= render 'images_upload', :post => f %>  
-
-	<%= f.fields_for :attachements do |fa| %>
-		<div class="modal-pictures">
-			Change Image:<%= fa.file_field :image %>
-			Delete Image <%= fa.check_box "_destroy" %><br />
-			<%= image_tag fa.object.image.url(:small), class: "img-thumbnail" %>
-			<br />
+		<div class="modal-footer">
+			<%= f.button 'Save', id: "save-button", :class => 'btn btn-primary' %>
+			<%= link_to 'Back', posts_path, type: "button", class: "btn btn-primary btn-default" %>
 		</div>
 	<% end %>
-
-	<p>
-		<%= f.label :loc_name, "Add a location" %><br />
-		<%= f.text_field :loc_name, id: "geocomplete", type: "text", placeholder: "Type in a location"  %>
-		<%=f.hidden_field :lng, id: "lng" %>
-    	<%=f.hidden_field :lat, id: "lat" %>
-    	<%=f.hidden_field :loc_name, id: "formatted_address" %>
-	</p>
-
-	<div class="map_canvas"></div>
-
-
-	<div class="modal-footer">
-	<%= f.button 'Save', id: "save-button", :class => 'btn btn-primary' %>
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	</div>
-<% end %>
-
+</div>
 	

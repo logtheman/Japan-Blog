@@ -33,11 +33,7 @@
 	max-height: 200px;
 }
 */
-.post-img {
-	min-width: 0;
-	width: 100%;
-	max-height: 200px;
-}
+
 
 .page-header{
 	padding-bottom: 0em;
@@ -63,11 +59,6 @@
 }
 
 
-
-#post-tabs > a
-{
-	color: rgba(0, 27, 80, .7);
-}
 
 
 
@@ -99,6 +90,11 @@
 	padding: .2em 1em;
 }
 
+.post-show{
+	margin: 0em 1em 1em 1em;
+
+}
+
 #post-container {
 	border: none;
 	background-color: rgba(255, 249, 249 .1);
@@ -118,6 +114,17 @@
 .post_buttons {
 	text-align: center;
 
+}
+
+#post-tabs > a
+{
+	color: rgba(0, 27, 80, .7);
+}
+
+.post-img {
+	min-width: 0;
+	width: 100%;
+	max-height: 200px;
 }
 
 

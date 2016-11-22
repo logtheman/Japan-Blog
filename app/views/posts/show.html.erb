@@ -1,50 +1,67 @@
 
-<h1>Posts</h1>
+<div class="post post-show">
+  <div class="col-xs-12 col-md-8">
+    <li><h4 class="card-title"><%= @post.title %></h4></li>
+      <div class="panel-body flex-text">
+        <li><%= @post.description %></li>
+      </div>
 
-<p>
-	<strong>Location:</strong>
-	<%= @post.title %>
+      <div class="panel-body">
+        <li class="">Tags: <%= raw @post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
+        <li>Location: <%= @post.loc_name %></li>
+        <!--li>Latitude: <%#= post.lat %>, Longitude: <%#= post.lng %></li>-->
+      </div>
+        <% @post.attachements.each do |a| %>
+          <%= image_tag a.image.url(:large), class: "flex-row modal-pictures img-thumbnail" %>
+        <% end %>
+      <div class="panel-body">
+        <ul class="nav navbar-nav">
+          <% if logged_in? && current_user == @post.user %>           
+            <%= render 'modal', post: @post %>
+            <li> 
+              <%= button_to @post, method: :delete, remote: true, class: "btn btn-primary btn-default" do %>
+                Delete Post
+              <% end %>
+            </li>
 
-</p>
+              <%= link_to 'Edit Post', edit_post_path(@post), type: "button", class: "btn btn-primary btn-default" %>
+              
+            </li>
+          <% end %>
+          <%= link_to 'Back', posts_path, type: "button", class: "btn btn-primary btn-default" %>
+         </ul>
+      </div>
 
-<p>
-	<strong>Description</strong>
-	<%= @post.description %>
-</p>
-
-<p>
-  <strong>Post by</strong>
-  <%= @post.user %>
-</p>
-
-<h2>Comments</h2>
-<% @post.comments.each do |comment| %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-  </p>
- 
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-  </p>
-<% end %>
-
-
-<h2>Add a comment:</h2>
-<%= form_for([@post, @post.comments.build]) do |f| %>
-  <p>
-    <%= f.label :commenter %><br>
-    <%= f.text_field :commenter %>
-  </p>
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+      <h3 class="card-title">Comments</h3>
+      <div class="anel-body flex-text">
+        <% @post.comments.each do |f| %>
+          <div class="panel-primary">
+              <div class="panel-body"> 
+                  <%= f.body %>
+              </div>
+              <div class="panel-footer">
+                  <small>
+                   Posted by: <%= f.user.username %>
+                  </small>
+              </div>
+            </div>
+          <% end %>
+          <h2>Add a comment:</h2>
+          <%= form_for([@post, @post.comments.build]) do |t| %>
+            <p>
+              <%= t.text_area :body, style: "min-width: 100%", rows: "5"%>
+            </p>
+          <div class="modal-footer">
+              <p>
+                <%= t.button 'Save Comment', :class => 'btn btn-primary' %>
+                <%= link_to 'Back', posts_path, type: "button", class: "btn btn-primary btn-default" %>
+              </p>
+            <% end %>
+          </div>
+  </div>          
+</div>     
+<!--
+    </div>
+  </div>
+</div>
+-->

@@ -1,7 +1,7 @@
 class Attachement < ActiveRecord::Base
 	belongs_to :attachable, polymorphic: true	
 
-	has_attached_file :image, styles: { thumb: "64x64", med: "300x300", large: "600x600" }, 
+	has_attached_file :image, styles: { thumb: "64x64", med: "400x400", large: "800x800" }, 
 		default_url: ":rails_root/public/system/app/images/:style/missing.png",
         :url  => "/assets/images/posts/:basename.:extension",
         :path => ":rails_root/public/assets/images/posts/:basename.:extension"

@@ -40,10 +40,7 @@
 
             <div class="">
               <li>
-              <%# f.attachements.first do |a| %>
-                <%#= image_tag a.image.url(:large), class: "post-img flex-row" %>
-              <%# end %>
-              <%= image_tag f.attachements.first.image.url(:large), class: "post-img flex-row" %>
+                <%= image_tag f.attachements.first.image.url(:large), class: "post-img flex-row" %>
               </li>
             </div>
             <div class="card-block">
@@ -51,8 +48,8 @@
                 <div class="panel-body flex-text">
                   <li><%#= f.description %><%=h truncate(f.description, :length => 80) %></li>
                 </div>
-                <%= render "display", post: f %>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#post-display-<%= f.id %>">Read More</button>
+                <%= link_to 'Read More', post_path(f), type: "button", class: "btn btn-primary btn-sm" %>
+                
                 <!--Tags: <%#= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>-->
 
             </div>
