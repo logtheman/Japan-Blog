@@ -5,12 +5,21 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user , :logged_in?
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  
 
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :password_confirmation, :remember_me])
+ #   devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :password_confirmation, :remember_me, :image])
     devise_parameter_sanitizer.permit(:login, keys: [:username, :email, :password, :remember_me])
+    devise_parameter_sanitizer.permit(:sign_up) do |u|
+      u.permit(:name, :username, :image,
+        :email, :password, :password_confirmation)
+    end
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(:name, :username, :image,
+        :email, :password, :password_confirmation, :current_password)
+    end
   end
 
   def logged_in?

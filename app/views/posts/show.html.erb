@@ -1,7 +1,7 @@
 
 <div class="post post-show">
-  <div class="col-xs-12 col-md-8">
-    <li><h4 class="card-title"><%= @post.title %></h4></li>
+  <div class="col-xs-14 col-md-10">
+    <li><h2 class="post-title">&nbsp;&nbsp;<%= @post.title %></h2></li>
       <div class="panel-body flex-text">
         <li><%= @post.description %></li>
       </div>
@@ -9,59 +9,105 @@
       <div class="panel-body">
         <li class="">Tags: <%= raw @post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
         <li>Location: <%= @post.loc_name %></li>
+        <li>
+          <% if @post.views.present?  %>    
+            <%= @post.views %>
+            <%=image_tag("views_icon.png", class: "post-icon")%>
+          <% end %>
+          <% if @post.comments.count > 0  %>  
+            <%= @post.comments.count %>
+            <%=image_tag("comments_icon.png", class: "post-icon")%>
+          <% end %>  
+          <% if @post.likes.count > 0  %>  
+            <%= @post.likes.count %>
+            <%=image_tag("heart_icon.png", class: "post-icon")%>
+          <% end %>
+        </li>
+
         <!--li>Latitude: <%#= post.lat %>, Longitude: <%#= post.lng %></li>-->
       </div>
         <% @post.attachements.each do |a| %>
-          <%= image_tag a.image.url(:large), class: "flex-row modal-pictures img-thumbnail" %>
+          <%= image_tag a.image.url(:large), class: "flex-row post-show-pictures img-thumbnail" %>
         <% end %>
       <div class="panel-body">
-        <ul class="nav navbar-nav">
+        <ul class="list-inline">
           <% if logged_in? && current_user == @post.user %>           
-            <%= render 'modal', post: @post %>
             <li> 
               <%= button_to @post, method: :delete, remote: true, class: "btn btn-primary btn-default" do %>
                 Delete Post
               <% end %>
             </li>
-
-              <%= link_to 'Edit Post', edit_post_path(@post), type: "button", class: "btn btn-primary btn-default" %>
-              
+            <li>
+              <%= link_to 'Edit Post', edit_post_path(@post), type: "button", class: "btn btn-primary btn-default post-button" %>
             </li>
           <% end %>
-          <%= link_to 'Back', posts_path, type: "button", class: "btn btn-primary btn-default" %>
-         </ul>
+          <li>
+            <%= link_to 'Back', posts_path, type: "button", class: "btn btn-primary btn-default" %>
+          </li>
+          <li>
+            <%#= link_to 'いいね！', type: "button", class: "btn btn-primary" %> 
+            <%# if current_user.like?(@post) %>
+              <%#= button_to "いいね！", unlike_path(post_id: post.id), remote: true, method: :delete  %>
+            <%# else %>
+              <%= button_to "いいね！", like_path(post_id: @post.id), class: "btn btn-primary", remote: true  %>
+            <%# end %>
+          </li>
+        </ul>
       </div>
 
       <h3 class="card-title">Comments</h3>
-      <div class="anel-body flex-text">
+      <div class="panel-body flex-text">
+      <div class="container">
         <% @post.comments.each do |f| %>
-          <div class="panel-primary">
-              <div class="panel-body"> 
-                  <%= f.body %>
+          <div class="row">
+          <div class="col-sm-1">
+            <div class="thumbnail">
+               <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+              <!-- Pictures go here -->
+
+          </div><!-- /thumbnail -->
+          </div><!-- /col-sm-1 -->
+          <div class="col-sm-7">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <%= f.user.username %> commented <%= distance_of_time_in_words(DateTime.now, f.created_at) %>  ago
               </div>
-              <div class="panel-footer">
-                  <small>
-                   Posted by: <%= f.user.username %>
-                  </small>
-              </div>
+              <div class="panel-body">
+                  <% if f.user == @post.user %>
+                    <div class="author-comment">
+                      <i>Author Comment</i>
+                    </div>
+                    <br />
+                  <% end %>
+                    <%= f.body %>
+              </div><!-- /panel-body -->
+            </div><!-- /panel panel-default -->
+          </div>  <!-- /col-sm-9 -->   
+          <div class="col-sm-3">
+            <% if logged_in? && current_user == f.user %>   
+              <%= button_to [@post, f], method: :delete, remote: true, class: "btn btn-primary btn-sm" do %>
+                Delete Comment
+              <% end %>
+            <%end%>
             </div>
-          <% end %>
-          <h2>Add a comment:</h2>
+        </div>
+
+        <% end %>
+        <div class="col-sm-10">
+          <h3>Add a comment:</h3>
           <%= form_for([@post, @post.comments.build]) do |t| %>
             <p>
               <%= t.text_area :body, style: "min-width: 100%", rows: "5"%>
             </p>
           <div class="modal-footer">
               <p>
-                <%= t.button 'Save Comment', :class => 'btn btn-primary' %>
+                <%= t.button 'Save Comment', :class => 'btn btn-primary post-button' %>
                 <%= link_to 'Back', posts_path, type: "button", class: "btn btn-primary btn-default" %>
               </p>
-            <% end %>
           </div>
+          <% end %>
+        </div>
+      </div>    
   </div>          
 </div>     
-<!--
-    </div>
-  </div>
-</div>
--->
+

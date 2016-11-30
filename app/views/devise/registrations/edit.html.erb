@@ -36,7 +36,14 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
-  <div class="actions">
+  <div class="field"><br />
+    Edit Avatar:
+    <%= f.fields_for :image do |form| %>
+     <%= form.file_field :image, as: :file %>
+    <% end %>
+  </div>
+
+  <div class="actions"><br />
     <%= f.submit "Update" %>
   </div>
 <% end %>

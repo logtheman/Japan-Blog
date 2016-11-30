@@ -1,20 +1,4 @@
 
-  <script>
-
-    $(document).ready(function() {
-      var map = $("#geocomplete").geocomplete({
-            details: "form",
-            types: ["geocode", "establishment"],
-            detailsAttribute: "id",
-            map: ".map_canvas",
-          }).bind("geocode:result", function(event, result){
-            console.log(result);
-            google.maps.event.trigger(map, "resize");
-
-        });});
-
-    </script>
-
 
 <!-- Post Body-->
 <section class="post-nav">
@@ -35,27 +19,49 @@
 
 
       <div class="col-xs-6 col-sm-4 col-lg-3">
+        <%= link_to(post_path(f), class: "no-style") do %>
+
       		<li> <%#= f.created_at.strftime('%D') %></li>
       		<div class="panel-primary" id="post-container">
 
-            <div class="">
+            <div class="flex-row">
               <li>
-                <%= image_tag f.attachements.first.image.url(:large), class: "post-img flex-row" %>
+                <%= image_tag f.attachements.first.image.url(:large), class: "post-img" %>
               </li>
             </div>
             <div class="card-block">
               <li><h4 class="card-title"><%= f.title %></h4></li>
                 <div class="panel-body flex-text">
                   <li><%#= f.description %><%=h truncate(f.description, :length => 80) %></li>
+                  <li>   
+                  <button class="btn btn-primary like-button"> いいね！ </button>
+                  <br />     
+                    <% if f.views.present?  %>    
+                      <%= f.views %>
+                      <%=image_tag("views_icon.png", class: "post-icon")%>
+                    <% end %>
+                    <% if f.comments.count > 0  %>  
+                      <%= f.comments.count %>
+                      <%=image_tag("comments_icon.png", class: "post-icon")%>
+                    <% end %>  
+                    <% if f.likes.count > 0 %>    
+                      <%= f.likes %>
+                      <%=image_tag("heart_icon.png", class: "post-icon")%>
+                    <% end %>
+                    <% if f.attachements.count > 0  %>  
+                      <%= f.attachements.count %>
+                      <%=image_tag("picture_icon.png", class: "post-icon")%>
+                    <% end %>  
+                  
+                  </li> 
+              
                 </div>
-                <%= link_to 'Read More', post_path(f), type: "button", class: "btn btn-primary btn-sm" %>
-                
-                <!--Tags: <%#= raw f.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>-->
 
             </div>
 
 
     		  	</div>
+            <% end %>
             <small>Posted by <%= f.user.username %></small><br />
 		  </div>
 

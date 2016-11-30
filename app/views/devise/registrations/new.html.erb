@@ -1,34 +1,42 @@
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2>Sign Up</h2>
+      </div>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, required: true %>
-  </div>
+      <div class="modal-body">
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true }) do |f| %>
+        <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+        <div><%= f.label :email %><br />
+        <%= f.email_field :email, :autofocus => true %></div>
+         
+         <p><%= f.label :username %><br />
+        <%= f.text_field :username %></p>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+        <div><%= f.label :password %><br />
+        <%= f.password_field :password %></div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+        <div><%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation %></div>
+        <br />
+
+        Add an Avatar:
+
+        <%= f.fields_for :image do |form| %>
+         <%= form.file_field :image, as: :file %>
+        <% end %>
+
+        <div><%= f.submit "Sign up", :class => 'btn btn-small btn-success' %></div>
+      </div>
+      <div class="modal-footer">
+      <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+   </div>
+  </div>  
 
 <%= render "devise/shared/links" %>

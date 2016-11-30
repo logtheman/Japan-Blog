@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107034705) do
+ActiveRecord::Schema.define(version: 20161125172141) do
 
   create_table "attachements", force: :cascade do |t|
     t.text     "description"
@@ -39,6 +39,38 @@ ActiveRecord::Schema.define(version: 20161107034705) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
+  create_table "likes", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "likes", ["post_id"], name: "index_likes_on_post_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+
+  create_table "locations", force: :cascade do |t|
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
+    t.decimal  "lat",               precision: 10, scale: 6
+    t.decimal  "lng",               precision: 10, scale: 6
+    t.string   "formatted_address"
+    t.string   "country"
+    t.string   "Locality"
+    t.string   "postal_code"
+    t.string   "state"
+    t.string   "google_map_url"
+    t.string   "location_name"
+    t.string   "street_number"
+    t.string   "route"
+    t.string   "sublocality"
+    t.string   "place_id"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "locations", ["locatable_type", "locatable_id"], name: "index_locations_on_locatable_type_and_locatable_id"
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -52,6 +84,7 @@ ActiveRecord::Schema.define(version: 20161107034705) do
     t.decimal  "lat",                precision: 10, scale: 6
     t.decimal  "lng",                precision: 10, scale: 6
     t.string   "loc_name"
+    t.integer  "views"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
@@ -97,6 +130,10 @@ ActiveRecord::Schema.define(version: 20161107034705) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "username"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

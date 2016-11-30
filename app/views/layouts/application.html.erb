@@ -21,7 +21,7 @@
 <body>
 
 <% if user_signed_in? %>
-  <%= render 'modal', post: Post.new %>
+  <%#= render 'modal', post: Post.new %>
 <% else %>
   <%= render "welcome/login_modal" %>                 
   <%= render "welcome/sign_up_modal" %> 
@@ -52,7 +52,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Everything Japan</a>
+            <%= link_to 'Everything Japan', posts_path, class: "navbar-brand" %>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -76,7 +76,7 @@
                   <li><%= link_to 'Login', "#login", "data-toggle" => "modal" %> </li>
               <% end %>   
             </ul>
-          </div><!--/.nav-collapse -->
+          </div>
         </div>
       </nav>
   </nav>
@@ -90,8 +90,6 @@
 
 <%= yield %>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-CClVVnN2RnG6ICiyr-Vh_qLgQpbYhU0&libraries=places"></script>
-
-  <script src="../assets/jquery.geocomplete.js"></script>
 
 </body>
 </html>

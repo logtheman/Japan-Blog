@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
     resources :attachements
+    resources :likes
   end 
-  
+
+  match 'like', to: 'likes#like', via: :post
+  match 'unlike', to: 'likes#unlike', via: :delete
 
   root to: 'posts#index'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
 	has_many :comments
+  has_many :likes, dependent: :destroy
 	belongs_to :user
   has_many :attachements, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :attachements, :allow_destroy => true

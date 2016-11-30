@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.create(comment_params)
     @comment.user_id = current_user.id
   	@comment.save
-    redirect_to posts_path
+    redirect_to post_path(@post)
 
   end
 
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
    
-    redirect_to posts_path
+    redirect_to :back
   end
  
   private

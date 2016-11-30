@@ -20,11 +20,15 @@ class PostsController < ApplicationController
 
 	def show
     	@post = Post.find(params[:id])
+      @post.increment(:views, 1)
+      @post.save
   end
 
 	def new
 		@post = Post.new
     #current_user validation
+    @post.views=0
+    @post.save
 	end
 
 	def edit
@@ -44,30 +48,32 @@ class PostsController < ApplicationController
           end
         end
       	redirect_to posts_path
-    	end
-    end	
+  	end
+  end	
 
-    def update
-    	@post = current_user.posts.find(params[:id])
 
-    	if @post.update(post_params)
-          if params[:attachments].present?
-            params[:attachments]['image'].each do |a|
-              @attachement = @post.attachements.create!(:image => a)
-            end
+  def update
+  	@post = current_user.posts.find(params[:id])
+
+  	if @post.update(post_params)
+        if params[:attachments].present?
+          params[:attachments]['image'].each do |a|
+            @attachement = @post.attachements.create!(:image => a)
           end
+        end
 
 
-    		redirect_to posts_path 
-    	end
-    end
+  		redirect_to post_path(@post)
+  	end
+  end
 
-	  def destroy
-	    @post = current_user.posts.find(params[:id])
-	    @post.destroy
-	 
-	    redirect_to posts_path
-	  end
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    @post.destroy
+ 
+    redirect_to posts_path
+  end
+
 
 	   private
        def get_post
