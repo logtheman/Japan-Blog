@@ -1,8 +1,8 @@
 class CreateLikes < ActiveRecord::Migration
   def self.up
 	  create_table :likes do |t|
-	    t.belongs_to :post, index: true
-	    t.belongs_to :user, index: true
+	    t.references :post, index: true, foreign_key: true
+	    t.references :user, index: true, foreign_key: true
 	    t.timestamps null: false
 	  end
   end

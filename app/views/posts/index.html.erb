@@ -45,7 +45,7 @@
                       <%=image_tag("comments_icon.png", class: "post-icon")%>
                     <% end %>  
                     <% if f.likes.count > 0 %>    
-                      <%= f.likes %>
+                      <%= f.likes.count %>
                       <%=image_tag("heart_icon.png", class: "post-icon")%>
                     <% end %>
                     <% if f.attachements.count > 0  %>  
