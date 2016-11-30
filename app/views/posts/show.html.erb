@@ -45,12 +45,9 @@
             <%= link_to 'Back', posts_path, type: "button", class: "btn btn-primary btn-default" %>
           </li>
           <li>
-            <%#= link_to 'いいね！', type: "button", class: "btn btn-primary" %> 
-            <%# if current_user.like?(@post) %>
-              <%#= button_to "いいね！", unlike_path(post_id: post.id), remote: true, method: :delete  %>
-            <%# else %>
-              <%= button_to "いいね！", like_path(post_id: @post.id), class: "btn btn-primary", remote: true  %>
-            <%# end %>
+            <%= div_for @post do %>
+              <%= render partial: "likes/button", locals: { post: @post } %>
+            <% end %>  
           </li>
         </ul>
       </div>

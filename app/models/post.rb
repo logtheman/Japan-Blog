@@ -19,4 +19,16 @@ class Post < ActiveRecord::Base
 
     scope :sort_by_newest, -> { order(created_at: :desc) }
     scope :username, -> { User.find(user_id) }
+
+
+  def liked?(user)
+    @like = self.likes.find_by_post_id(self.id)
+    if @like.present?
+      if @like.user == user
+        true
+      else
+        false
+      end
+    end
+  end
 end

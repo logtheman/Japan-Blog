@@ -1,0 +1,7 @@
+
+
+<% if post.liked?(current_user) %>
+  <%= button_to "よっくない", unlike_path(post_id: post.id), class: "btn btn-secondary", remote: true, method: :delete  %>
+<% else %>
+  <%= button_to "いいね！", like_path(post_id: post.id), class: "btn btn-primary", remote: true  %>
+<% end %>
