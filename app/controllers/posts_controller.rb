@@ -15,7 +15,16 @@ class PostsController < ApplicationController
     if params[:tag]
       @posts = Post.tagged_with(params[:tag])
     end
-    
+    if params[:sort_by] == 'most_comments'
+      @posts = @posts.joins(:comments).group("posts.id").order("count(comments.id) desc")
+    end
+    if params[:sort_by] == 'most_likes'
+      @posts = @posts.joins(:likes).group("posts.id").order("count(likes.id) desc")
+    end
+    if params[:sort_by] == 'most_views'
+      @posts = @posts.order(views: :desc)
+    end
+
   end
 
 	def show

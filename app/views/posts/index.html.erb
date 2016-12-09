@@ -6,9 +6,9 @@
   <ul id="post-tabs" class="nav nav-tabs">
       <li class=""><%= link_to( 'Most Recent', 'posts?sort_by=date_newest') %></li>
       <li class=""><%= link_to('Oldest', 'posts?sort_by=date_oldest') %></li>
-      <li class=""><a href="#growth" data-toggle="tab">Most Popular</a></li>
-      <li class=""><a href="#support" data-toggle="tab">Most Viewed</a></li>
-      <li class=""><a href="#culture" data-toggle="tab">Most Comments</a></li>
+      <li class=""><%= link_to('Most Popular', 'posts?sort_by=most_likes') %></li>
+      <li class=""><%= link_to('Most Viewed', 'posts?sort_by=most_views') %></li>
+      <li class=""><%= link_to('Most Comments', 'posts?sort_by=most_comments') %></li>
   </ul>
 </section>
 
@@ -34,7 +34,7 @@
                 <div class="panel-body flex-text">
                   <li><%#= f.description %><%=h truncate(f.description, :length => 80) %></li>
                   <li>   
-                  <button class="btn btn-primary like-button"> いいね！ </button>
+                  <input type="button" value="いいね！" class="btn btn-primary like-button" onclick="myFunction()"  data-post-id="#{post.id}" id="like_button" /> 
                   <br />     
                     <% if f.views.present?  %>    
                       <%= f.views %>
@@ -72,6 +72,28 @@
 
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+
+  <script type="text/javascript">
+    //$('button#like').on('click', function(event){
+     function myFunction(){ 
+          event.preventDefault();
+          var button = document.getElementById("like_button");;
+          if (button.value == "いいね！") {
+            button.value = "よっくない";
+            console.log(button.getAttribute('data-post-id'));
+            //.post(like_path(post_id: post.id))            
+          } else {
+            button.value = "いいね！"
+            console.log(button.value);
+          }
+          $(button).toggleClass("btn-primary btn-secondary");
+          // event.target.prop('href');
+          // $.ajax('/like',{post.id:___}, function(data)
+          // .post(url).success(function(){
+              //unlike button
+              //can change the button on default and revert if unsuccessful
+    }//);
+  </script>
 
 <style>
 /* Extra Media Query Below for Retina Iphones and Smaller */
