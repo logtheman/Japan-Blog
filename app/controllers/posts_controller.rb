@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = Post.all
+    @posts = Post.preload(:attachements, :user, :likes)
     if params[:sort_by] == 'date_newest'
       @posts = @posts.sort_by_newest
     end
@@ -24,7 +24,6 @@ class PostsController < ApplicationController
     if params[:sort_by] == 'most_views'
       @posts = @posts.order(views: :desc)
     end
-
   end
 
 	def show
@@ -35,7 +34,6 @@ class PostsController < ApplicationController
 
 	def new
 		@post = Post.new
-    #current_user validation
     @post.views=0
     @post.save
 	end

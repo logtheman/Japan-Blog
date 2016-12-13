@@ -22,13 +22,10 @@ class Post < ActiveRecord::Base
 
 
   def liked?(user)
-    @like = self.likes.find_by_post_id(self.id)
-    if @like.present?
-      if @like.user == user
-        true
-      else
-        false
-      end
+    if likes.loaded?
+      !!likes.find { |l| l.user_id == user.id }
+    else
+      likes.where(user_id: user.id).exists?
     end
   end
 end

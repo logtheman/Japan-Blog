@@ -40,8 +40,8 @@ class LikesController < ApplicationController
     end
 
       private
-        def attachement_params
-   #       params.require(:attachement).permit(:image)
+        def post_params
+          params.require(:like).permit(:user, :post_id)
         end
 
 end
