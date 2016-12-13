@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
- 
+
   respond_to :js
 
   def like

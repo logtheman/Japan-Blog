@@ -34,7 +34,8 @@
                 <div class="panel-body flex-text">
                   <li><%#= f.description %><%=h truncate(f.description, :length => 80) %></li>
                   <li>   
-                  <input type="button" value="いいね！" class="btn btn-primary like-button" onclick="myFunction()"  data-post-id="#{post.id}" id="like_button" /> 
+                  <input type="button" value="いいね！" class="btn btn-primary like-button" data-target="<%= f.id %>" id="like_button" /> 
+                  <%#= button_to 'link', value: "いいね！", class: "btn btn-primary like-button", onclick: "myFunction()", 'data-target' => "#{f.id}", id:"like_button" %>
                   <br />     
                     <% if f.views.present?  %>    
                       <%= f.views %>
@@ -74,25 +75,57 @@
 <p class="alert"><%= alert %></p>
 
   <script type="text/javascript">
-    //$('button#like').on('click', function(event){
-     function myFunction(){ 
+    $('.like-button').on('click', function(event){
           event.preventDefault();
-          var button = document.getElementById("like_button");;
-          if (button.value == "いいね！") {
-            button.value = "よっくない";
-            console.log(button.getAttribute('data-post-id'));
-            //.post(like_path(post_id: post.id))            
-          } else {
-            button.value = "いいね！"
-            console.log(button.value);
+
+          postId = $(this).attr("data-target");
+          console.log("Clicked like: ", postId, "<%= like_path() %>", "<%= form_authenticity_token %>");
+          
+          if (this.value == "いいね！") {
+            this.value = "よっくない";
+            this.className = "btn btn-secondary like-button";
+            $.ajax({
+              type: "POST",
+              url: "<%= like_path() %>",
+              data: {post_id: postId, authenticity_token: "<%= form_authenticity_token %>"},
+              success: function(){
+                console.log("yay! Success")
+              },
+              dataType: "json"
+
+            });
+          }else {
+            this.value = "いいね！"
+            this.className = "btn btn-primary like-button";
+            $.ajax({
+              type: "POST",
+              url: "<%= like_path() %>",
+              data: {post_id: postId, authenticity_token: "<%= form_authenticity_token %>"},
+              success: function(){
+                console.log("yay! Success")
+              },
+              dataType: "json"
+
+            });
           }
-          $(button).toggleClass("btn-primary btn-secondary");
+
+
+          // event.preventDefault();
+          // var button = document.getElementById("like_button");
+          // if (button.value == "いいね！") {
+          //   button.value = "よっくない";
+          //   button.className = "btn btn-secondary like-button";
+          //   //.post(like_path(post_id: post.id))            
+          // } else {
+          //   button.value = "いいね！"
+          //   button.className = "btn btn-primary like-button";
+          // }
           // event.target.prop('href');
           // $.ajax('/like',{post.id:___}, function(data)
           // .post(url).success(function(){
               //unlike button
               //can change the button on default and revert if unsuccessful
-    }//);
+    });
   </script>
 
 <style>
