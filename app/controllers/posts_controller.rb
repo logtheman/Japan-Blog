@@ -54,6 +54,8 @@ class PostsController < ApplicationController
             @attachement = @post.attachements.create!(:image => a)
           end
         end
+        @post.likes_count = 0;
+        @post.comments_count = 0;
       	redirect_to posts_path
   	end
   end	

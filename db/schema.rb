@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125172141) do
+ActiveRecord::Schema.define(version: 20161214004130) do
 
   create_table "attachements", force: :cascade do |t|
     t.text     "description"
@@ -85,6 +85,9 @@ ActiveRecord::Schema.define(version: 20161125172141) do
     t.decimal  "lng",                precision: 10, scale: 6
     t.string   "loc_name"
     t.integer  "views"
+    t.integer  "likes_count"
+    t.integer  "comments_count"
+    t.integer  "users_count"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
