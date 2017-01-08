@@ -23,10 +23,10 @@
         <%= f.password_field :password_confirmation %></div>
         <br />
 
-        Add an Avatar:
-        <%= f.fields_for :image do |form| %>
-         <%= form.file_field :image, as: :file %>
-        <% end %>
+<!--         Add an Avatar:
+        <#%= f.fields_for :image do |form| %>
+         <#%= form.file_field :image, as: :file %>
+        <#% end %> -->
 
         <div><%= f.submit "Sign up", :class => 'btn btn-small btn-success' %></div>
       </div>
